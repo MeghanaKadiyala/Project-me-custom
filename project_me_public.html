@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Me: Customizable Edition ✨</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #8B0000, #DA70D6, #FFC0CB);
+    color: #fff;
+    min-height: 100vh;
+    transition: background 0.8s ease;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 5px #000;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% { text-shadow: 1px 1px 5px #000, 0 0 10px #FF1493; }
+    100% { text-shadow: 1px 1px 5px #000, 0 0 20px #FF69B4; }
+}
+
+.section {
+    background: rgba(0,0,0,0.25);
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(255,20,147,0.7);
+}
+
+h2 {
+    margin-top: 0;
+    color: #FFD1DC;
+    text-shadow: 1px 1px 3px #000;
+    position: relative;
+}
+
+h2::after {
+    content: '✨';
+    position: absolute;
+    right: -25px;
+    animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+    0% { opacity: 0; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(0.8); }
+}
+
+label {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+label:hover {
+    color: #FFB6C1;
+}
+
+input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+    cursor: pointer;
+    accent-color: #FF1493;
+    transition: transform 0.2s ease;
+}
+
+input[type="checkbox"]:hover {
+    transform: scale(1.5);
+}
+
+textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    resize: none;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 0 10px rgba(255,20,147,0.4);
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(255,20,147,0.7);
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input[type="range"] {
+    width: 70%;
+}
+
+#summary {
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(255,20,147,0.4);
+    transition: transform 0.3s ease;
+}
+
+#summary:hover {
+    transform: scale(1.02);
+}
+
+button {
+    background: #FF1493;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: #DC143C;
+    transform: scale(1.05);
+}
+
+.task-text {
+    display: inline-block;
+    width: calc(100% - 40px);
+}
+
+.task-text[contenteditable="true"]:hover {
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px;
+}
+
+.add-btn, .delete-btn {
+    background: transparent;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 5px;
+    transition: color 0.2s ease;
+}
+
+.add-btn:hover, .delete-btn:hover {
+    color: #FFB6C1;
+}
+
+.section hr {
+    border: 0;
+    border-top: 1px solid #fff5;
+    margin: 15px 0;
+}
+
+@media(max-width:600px){
+    .section {
+        margin: 10px;
+        padding: 15px;
+    }
+}
+</style>
+</head>
+<body>
+<h1>Project Me: Customizable Edition ✨</h1>
+
+<button id="toggleModeBtn">Switch to Customize Mode</button>
+
+<div id="sections-container">
+<!-- Default Sections -->
+<div class="section" data-section="morning">
+    <h2>🌅 Morning Ritual</h2>
+    <label><input type="checkbox" class="task" data-key="morning-1"><span class="task-text">Wake up & hydrate</span><button class="delete-btn">🗑️</button></label>
+    <label><input type="checkbox" class="task" data-key="morning-2"><span class="task-text">PCOD care (tea/warm water)</span><button class="delete-btn">🗑️</button></label>
+    <button class="add-btn">➕ Add Task</button>
+</div>
+
+<div class="section" data-section="college">
+    <h2>🧠 College / Productivity</h2>
+    <label><input type="checkbox" class="task" data-key="college-1"><span class="task-text">Attend classes</span><button class="delete-btn">🗑️</button></label>
+    <label><input type="checkbox" class="task" data-key="college-2"><span class="task-text">Revise one topic</span><button class="delete-btn">🗑️</button></label>
+    <button class="add-btn">➕ Add Task</button>
+</div>
+</div>
+
+<button id="addSectionBtn">➕ Add Section</button>
+
+<!-- Mood & Energy -->
+<div class="section" id="mood">
+    <h2>✨ Mood & Energy</h2>
+    <div class="slider-container">
+        <label>Mood: <span id="mood-val">3</span></label>
+        <input type="range" min="1" max="5" value="3" id="mood-slider">
+    </div>
+    <div class="slider-container">
+        <label>Energy: <span id="energy-val">3</span></label>
+        <input type="range" min="1" max="5" value="3" id="energy-slider">
+    </div>
+</div>
+
+<!-- Journal -->
+<div class="section" id="journal">
+    <h2>📝 Daily Notes</h2>
+    <textarea id="journal-text" rows="4" placeholder="Write reflections, wins, cramps, random thoughts..."></textarea>
+</div>
+
+<!-- Summary -->
+<div class="section" id="summary-section">
+    <h2>📊 Monthly Summary</h2>
+    <button onclick="showSummary()">Show Monthly Summary</button>
+    <div id="summary"></div>
+</div>
+
+<script>
+// Utility
+function getToday() {
+    const d = new Date();
+    return d.getFullYear() + '-' + (d.getMonth()+1) + '-' + d.getDate();
+}
+const today = getToday();
+
+// Mode Toggle
+let customizeMode = false;
+const toggleBtn = document.getElementById('toggleModeBtn');
+toggleBtn.addEventListener('click', () => {
+    customizeMode = !customizeMode;
+    toggleBtn.innerText = customizeMode ? "Switch to View Mode" : "Switch to Customize Mode";
+    document.querySelectorAll('.task-text').forEach(t => t.contentEditable = customizeMode);
+    document.querySelectorAll('.add-btn, .delete-btn').forEach(btn => btn.style.display = customizeMode ? 'inline' : 'none');
+});
+
+// Initialize tasks
+function initTasks() {
+    const tasks = document.querySelectorAll('.task');
+    tasks.forEach(task => {
+        const key = task.dataset.key + '-' + today;
+        if(localStorage.getItem(key) === 'true') task.checked = true;
+        task.addEventListener('change', () => { localStorage.setItem(key, task.checked); });
+    });
+}
+initTasks();
+
+// Mood & energy
+const moodSlider = document.getElementById('mood-slider');
+const energySlider = document.getElementById('energy-slider');
+const moodVal = document.getElementById('mood-val');
+const energyVal = document.getElementById('energy-val');
+if(localStorage.getItem('mood-' + today)){ moodSlider.value = localStorage.getItem('mood-' + today); moodVal.innerText = moodSlider.value; }
+if(localStorage.getItem('energy-' + today)){ energySlider.value = localStorage.getItem('energy-' + today); energyVal.innerText = energySlider.value; }
+moodSlider.addEventListener('input', ()=>{ moodVal.innerText = moodSlider.value; localStorage.setItem('mood-' + today, moodSlider.value); });
+energySlider.addEventListener('input', ()=>{ energyVal.innerText = energySlider.value; localStorage.setItem('energy-' + today, energySlider.value); });
+
+// Journal
+const journal = document.getElementById('journal-text');
+if(localStorage.getItem('journal-' + today)) journal.value = localStorage.getItem('journal-' + today);
+journal.addEventListener('input', () => { localStorage.setItem('journal-' + today, journal.value); });
+
+// Monthly Summary
+function showSummary() {
+    let summaryHTML = '';
+    document.querySelectorAll('.section').forEach(section=>{
+        const sectionName = section.querySelector('h2')?.innerText || '';
+        let completed = 0;
+        const totalTasks = section.querySelectorAll('.task').length;
+        section.querySelectorAll('.task').forEach(task=>{
+            const key = task.dataset.key + '-' + today;
+            if(localStorage.getItem(key) === 'true') completed++;
+        });
+        if(totalTasks>0) summaryHTML += `<p>${sectionName}: ${completed} / ${totalTasks}</p>`;
+    });
+    const mood = localStorage.getItem('mood-' + today) || '-';
+    const energy = localStorage.getItem('energy-' + today) || '-';
+    const notes = localStorage.getItem('journal-' + today) || '-';
+    summaryHTML += `<p>Mood: ${mood} / 5</p>`;
+    summaryHTML += `<p>Energy: ${energy} / 5</p>`;
+    summaryHTML += `<p>Notes: ${notes}</p>`;
+    document.getElementById('summary').innerHTML = summaryHTML;
+}
+
+// Add / Delete Task
+document.addEventListener('click', e=>{
+    if(e.target.classList.contains('add-btn')){
+        const section = e.target.closest('.section');
+        const count = section.querySelectorAll('.task').length + 1;
+        const keyBase = section.dataset.section + '-' + count;
+        const label = document.createElement('label');
+        label.innerHTML = `<input type="checkbox" class="task" data-key="${keyBase}"><span class="task-text" contenteditable="${customizeMode}">New Task</span><button class="delete-btn">🗑️</button>`;
+        section.insertBefore(label, e.target);
+        initTasks();
+    }
+    if(e.target.classList.contains('delete-btn')){
+        e.target.parentElement.remove();
+    }
+});
+
+// Add Section
+document.getElementById('addSectionBtn').addEventListener('click', ()=>{
+    const secCount = document.querySelectorAll('.section').length + 1;
+    const newSec = document.createElement('div');
+    newSec.classList.add('section');
+    newSec.dataset.section = 'custom-' + secCount;
+    newSec.innerHTML = `<h2 contenteditable="${customizeMode}">New Section</h2>
+                        <label><input type="checkbox" class="task" data-key="custom-${secCount}-1"><span class="task-text" contenteditable="${customizeMode}">New Task</span><button class="delete-btn">🗑️</button></label>
+                        <button class="add-btn">➕ Add Task</button>`;
+    document.getElementById('sections-container').appendChild(newSec);
+    document.querySelectorAll('.add-btn, .delete-btn').forEach(btn => btn.style.display = customizeMode ? 'inline' : 'none');
+    initTasks();
+});
+</script>
+</body>
+</html>
